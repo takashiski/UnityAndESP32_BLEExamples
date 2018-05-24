@@ -179,9 +179,10 @@ public class SimpleTest : MonoBehaviour
 
                     // we received some data from the device
                     _dataBytes = bytes;
+                    //bno055の座標系はUnityといっしょっぽいけど、ブレッドボードに刺すと90度奥に倒れた形になるっぽい
                     float qx = System.BitConverter.ToSingle(bytes, 0);
-                    float qy = System.BitConverter.ToSingle(bytes, 8);//zといれかえ
-                    float qz = System.BitConverter.ToSingle(bytes, 4);//yといれかえ
+                    float qy = System.BitConverter.ToSingle(bytes, 4);
+                    float qz = System.BitConverter.ToSingle(bytes, 8);
                     float qw = System.BitConverter.ToSingle(bytes, 12);
 
                     Quaternion q = new Quaternion(qx, qy, qz, qw);
