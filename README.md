@@ -5,7 +5,8 @@ BLE examples between unity and esp32. this repo used Unity Store Asset "Bluetoot
 
 You must to buy Unity Store Asset below to run this repo's BLE code for Unity.
 
-<iframe src="https://api.assetstore.unity3d.com/affiliate/embed/package/26661/widget-light?aid=1101lGs4" style="width:202px; height:260px; border:0px;"></iframe>
+Bluetooth LE for iOS, tvOS, android
+https://www.assetstore.unity3d.com/#!/content/26661/directpurchase?aid=1101lGs4 (Unity Asset Store Link)
 
 # Unity 
 
@@ -21,6 +22,9 @@ You must to buy Unity Store Asset below to run this repo's BLE code for Unity.
 
 ## Arduino BLE_IMU
 
+* this code is needed bno055, it is IMU.
+* Get quaternion by IMU(bno055).
+* Send data as notify.
 
 
 
