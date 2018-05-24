@@ -271,54 +271,5 @@ public class SimpleTest : MonoBehaviour
 		});
 	}
 
-	void OnGUI ()
-	{
-		GUI.skin.textArea.fontSize = 32;
-		GUI.skin.button.fontSize = 32;
-		GUI.skin.toggle.fontSize = 32;
-		GUI.skin.label.fontSize = 32;
-
-		if (_connected)
-		{
-			if (_state == States.None)
-			{
-				if (GUI.Button (new Rect (10, 10, Screen.width - 10, 100), "Disconnect"))
-					SetState (States.Unsubscribe, 1f);
-
-				//if (GUI.Button (new Rect (10, 210, Screen.width - 10, 100), "Write Value"))
-				//	OnLED ();
-
-				if (_dataBytes != null)
-				{
-					string data = "";
-					foreach (var b in _dataBytes)
-						data += b.ToString ("X") + " ";
-
-					GUI.TextArea (new Rect (10, 400, Screen.width - 10, 300), data);
-				}
-			}
-			else if (_state == States.Subscribe && _timeout == 0f)
-			{
-				GUI.TextArea (new Rect (50, 100, Screen.width - 100, Screen.height - 200), "Press the button on the RFduino");
-			}
-		}
-		else if (_state == States.ScanRSSI)
-		{
-			if (GUI.Button (new Rect (10, 10, Screen.width - 10, 100), "Stop Scanning"))
-			{
-				BluetoothLEHardwareInterface.StopScan ();
-				SetState (States.Disconnect, 0.5f);
-			}
-			
-			if (_rssi != 0)
-				GUI.Label (new Rect (10, 300, Screen.width - 10, 50), string.Format ("RSSI: {0}", _rssi));
-		}
-		else if (_state == States.None)
-		{
-			if (GUI.Button (new Rect (10, 10, Screen.width - 10, 100), "Connect"))
-				StartProcess ();
-
-			_rssiOnly = GUI.Toggle (new Rect (10, 200, Screen.width - 10, 50), _rssiOnly, "Just Show RSSI");
-		}
-	}
+	
 }
