@@ -43,6 +43,23 @@ public class SimpleTest : MonoBehaviour
     private GameObject cube;
     private Transform cubeTransform;
 
+ //   [SerializeField]
+ //   private Transform cameraTransform;
+    private Quaternion quatLookAtCam;
+    private Quaternion rawQuat;
+    [SerializeField]
+    private GameObject particle;
+
+    public void resetQuat()
+    {
+        //Quaternion cubeQuat = Quaternion.LookRotation(this.transform.position-cubeTransform.position);
+        //quatLookAtCam = cubeQuat * Quaternion.Inverse(rawQuat);
+        quatLookAtCam = Quaternion.Inverse(rawQuat);
+        GameObject go = Instantiate(particle);
+        GameObject.Destroy(go, 1f);
+    }
+
+
 	void Reset ()
 	{
 		_connected = false;
@@ -79,6 +96,7 @@ public class SimpleTest : MonoBehaviour
 	{
 		StartProcess ();
         cubeTransform = cube.GetComponent<Transform>();
+        quatLookAtCam = Quaternion.identity;
 	}
 
     void EvaluateBLEStates()
@@ -179,15 +197,16 @@ public class SimpleTest : MonoBehaviour
 
                     // we received some data from the device
                     _dataBytes = bytes;
-                    //bno055の座標系はUnityといっしょっぽいけど、ブレッドボードに刺すと90度奥に倒れた形になるっぽい
                     float qx = System.BitConverter.ToSingle(bytes, 0);
-                    float qy = System.BitConverter.ToSingle(bytes, 4);
-                    float qz = System.BitConverter.ToSingle(bytes, 8);
-                    float qw = System.BitConverter.ToSingle(bytes, 12);
+                    float qy = System.BitConverter.ToSingle(bytes, 8);
+                    float qz = System.BitConverter.ToSingle(bytes, 4);
+                    float qw = System.BitConverter.ToSingle(bytes, 12)*-1;
 
-                    Quaternion q = new Quaternion(qx, qy, qz, qw);
-                    cubeTransform.rotation = q;
-                    //cubeTransform.eulerAngles = Vector3.right * (int)bytes[0];
+                    rawQuat = new Quaternion(qx, qy, qz, qw);
+                    cubeTransform.rotation = rawQuat*quatLookAtCam;
+                    //DeviceNameFoundedText.text = qx.ToString() + " " + qy.ToString() + " " + qz.ToString() + " " + qw.ToString()+"\n";
+                    DeviceNameFoundedText.text = rawQuat.ToString()+"\n";
+                    DeviceNameFoundedText.text += cubeTransform.rotation.ToString();
 
                 });
                 break;
@@ -221,6 +240,10 @@ public class SimpleTest : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            resetQuat();
+        }
         stateText.text = _state.ToString();
 		if (_timeout > 0f)
 		{
