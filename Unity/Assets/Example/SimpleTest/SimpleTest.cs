@@ -54,6 +54,7 @@ public class SimpleTest : MonoBehaviour
     {
         //Quaternion cubeQuat = Quaternion.LookRotation(this.transform.position-cubeTransform.position);
         //quatLookAtCam = cubeQuat * Quaternion.Inverse(rawQuat);
+        //quatLookAtCam = Quaternion.Inverse(cubeTransform.rotation);
         quatLookAtCam = Quaternion.Inverse(rawQuat);
         GameObject go = Instantiate(particle);
         GameObject.Destroy(go, 1f);
@@ -203,10 +204,11 @@ public class SimpleTest : MonoBehaviour
                     float qw = System.BitConverter.ToSingle(bytes, 12)*-1;
 
                     rawQuat = new Quaternion(qx, qy, qz, qw);
-                    cubeTransform.rotation = rawQuat*quatLookAtCam;
+                    cubeTransform.rotation = quatLookAtCam*rawQuat;
+
                     //DeviceNameFoundedText.text = qx.ToString() + " " + qy.ToString() + " " + qz.ToString() + " " + qw.ToString()+"\n";
-                    DeviceNameFoundedText.text = rawQuat.ToString()+"\n";
-                    DeviceNameFoundedText.text += cubeTransform.rotation.ToString();
+                    DeviceNameFoundedText.text = "raw : "+rawQuat.ToString()+"\n";
+                    DeviceNameFoundedText.text += "cube : "+cubeTransform.rotation.ToString();
 
                 });
                 break;
