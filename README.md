@@ -1,7 +1,11 @@
 # UnityAndESP32_BLEExamples
-BLE examples between unity and esp32. this repo used Unity Store Asset "Bluetooth LE for iOS, tvOS, android".
+BLE examples between unity and esp32. this repo used Unity Store Asset "Bluetooth LE for iOS, tvOS, android"
 
-# notice
+## DEMO
+
+https://www.youtube.com/watch?v=wEsxTf1MekU
+
+## notice
 
 You must to buy Unity Store Asset below to run this repo's BLE code for Unity.
 
