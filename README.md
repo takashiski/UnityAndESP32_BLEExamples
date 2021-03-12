@@ -11,6 +11,7 @@ You must to buy Unity Store Asset below to run this repo's BLE code for Unity.
 
 - Bluetooth LE for iOS, tvOS, android
   - https://www.assetstore.unity3d.com/#!/content/26661/directpurchase?aid=1101lGs4 (Unity Asset Store Link)
+  - https://assetstore.unity.com/packages/tools/network/bluetooth-le-for-ios-tvos-and-android-26661
 
 # Unity 
 
